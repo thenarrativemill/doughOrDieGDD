@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dough or Die — Overview</title>
+  <link href="css/bootstrap-5.3.8.css" rel="stylesheet">
+  <style>
+    :root {
+      --wood-primary: #B38864; --wood-secondary: #916440; --light-neutral: #BEAD9C;
+      --mid-neutral: #756A5B; --dark-accent: #3F281B; --near-black: #110A06;
+      --muted-teal: #7FA7A0; --deep-teal: #5F8F87; --dusty-red: #C46A5B;
+      --soft-pink: #E59A8C; --cream: #F2E8DC;
+    }
+    body { background-color: var(--near-black); color: var(--cream); font-family: Georgia, serif; min-height: 100vh; }
+    .navbar { background-color: var(--dark-accent) !important; border-bottom: 1px solid var(--wood-secondary); }
+    .navbar-brand { color: var(--cream) !important; font-size: 1.4rem; }
+    .nav-link { color: var(--light-neutral) !important; }
+    .nav-link:hover { color: var(--muted-teal) !important; }
+    .section-hero { background-color: var(--dark-accent); border-bottom: 1px solid var(--wood-secondary); padding: 2.5rem 0 2rem; }
+    .section-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--muted-teal); color:var(--muted-teal); border-radius:4px; font-size:0.75rem; padding:0.2rem 0.6rem; margin-bottom:0.75rem; }
+    .section-title { color: var(--wood-primary); font-size: 2.2rem; font-weight: bold; }
+    .section-subtitle { color: var(--light-neutral); font-size: 1rem; }
+    .content-card { background-color: var(--dark-accent); border: 1px solid var(--mid-neutral); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .content-card h5 { color: var(--wood-primary); margin-bottom: 0.75rem; font-size: 1rem; }
+    .content-card p, .content-card li { color: var(--light-neutral); font-size: 0.92rem; line-height: 1.7; }
+    .content-card ul { padding-left: 1.25rem; }
+    .tagline { font-family: Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--soft-pink); border-left: 3px solid var(--dusty-red); padding-left: 1rem; margin-bottom: 0.5rem; }
+    .competitor-card { background-color: var(--near-black); border: 1px solid var(--wood-secondary); border-radius: 6px; padding: 1rem; margin-bottom: 0.75rem; }
+    .competitor-name { color: var(--wood-primary); font-weight: bold; font-size: 0.92rem; margin-bottom: 0.3rem; }
+    .btn-teal { background-color: var(--muted-teal); border-color: var(--muted-teal); color: var(--near-black); font-weight: bold; }
+    .btn-teal:hover { background-color: var(--deep-teal); color: var(--cream); }
+    .btn-outline-wood { border-color: var(--wood-primary); color: var(--wood-primary); background: transparent; }
+    .btn-outline-wood:hover { background-color: var(--dark-accent); color: var(--cream); }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="index.html">Dough or Die — GDD</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="index.html">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="toc.html">Contents</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="section-hero">
+  <div class="container" style="max-width:800px;">
+    <span class="section-tag">Core</span>
+    <h1 class="section-title">Overview</h1>
+    <p class="section-subtitle">Game concept, 3 C's, audience, playstyle & market context</p>
+  </div>
+</div>
+
+<div class="container py-4" style="max-width:800px;">
+
+  <div class="content-card" id="tagline">
+    <h5>&#9670; Tagline</h5>
+    <p class="tagline">Bake to sell. Make to fight.</p>
+    <p class="tagline">Knead by day to feed the city; bake by night to crush the arena.</p>
+  </div>
+
+  <div class="content-card" id="overview-overview">
+    <h5>&#9670; Overview</h5>
+    <p>In a world where your finest ingredients are either your greatest profit or your deadliest weapon, every recipe is a choice between a thriving shop and a winning fighter.</p>
+    <p>You run a bakery by day, and an illegal underground mech arena by night. Baking living bread machines that fight to promote your brand and bakery. Balance hands-on first-person mech combat with tactile, recipe-driven baking, and business management.</p>
+  </div>
+
+  <div class="content-card" id="game-core">
+    <h5>&#9670; Game Core</h5>
+    <p>Players <strong style="color:var(--cream);">manage baking</strong> for their customers' orders and <strong style="color:var(--cream);">baking</strong> their bread golems during the day. After closing, you use your baked bread golem to <strong style="color:var(--cream);">fight</strong> other bakers' golems in the Dough Brawl Arena. Gain momentum and renown from your quality of service and fight outcomes and use them to improve your mechs or your bakery.</p>
+  </div>
+
+  <div class="content-card" id="audience-playstyle">
+    <h5>&#9670; Audience & Playstyle</h5>
+    <p>The audience we're aiming for are teen+, casual and core gamers, streamers/content creators, and people with interests in baking, mechs, fighting games, and sims. From the aesthetics of this game, we will attract mainly a female audience; but the fighting and automation will bring in a male audience as well.</p>
+    <p>The playstyle we're aiming for is the <strong style="color:var(--cream);">Mastermind</strong> player from the Brainhex Player Archetype and the <strong style="color:var(--cream);">Challenge, Fantasy, and Expression</strong> pleasures from LeBlanc's Taxonomy of Game Pleasure.</p>
+    <ul>
+      <li><strong style="color:var(--soft-pink);">Mastermind:</strong> Planning how you'll manage time between baking for the customers and baking your golem.</li>
+      <li><strong style="color:var(--soft-pink);">Challenge:</strong> Fighting against time to complete complex recipes for customers and even more complex recipes for the golems.</li>
+      <li><strong style="color:var(--soft-pink);">Fantasy:</strong> The combination of the environment and the transition from the management isometric view to first-person when piloting the golem adds to the magic circle.</li>
+      <li><strong style="color:var(--soft-pink);">Expression:</strong> Players can create whatever golem they'd like — they're not constricted to one.</li>
+    </ul>
+  </div>
+
+  <div class="content-card" id="three-cs">
+    <h5>&#9670; The 3 C's</h5>
+    <div class="content-card" style="background:var(--near-black); border-color:var(--wood-secondary); margin-bottom:0.75rem;">
+      <h6 style="color:var(--soft-pink); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Character</h6>
+      <ul>
+        <li><strong style="color:var(--cream);">Name:</strong> Francesca (Fran) Panettiere</li>
+        <li><strong style="color:var(--cream);">Appearance:</strong> 5'3", 130 lbs., brown eyes, brown curly hair, olive skin</li>
+        <li><strong style="color:var(--cream);">Clothing:</strong> Baggy jeans, apron, big scrunchie, folded-up sleeves, white tennis shoes, gold hoop earrings — slightly desaturated colors</li>
+        <li><strong style="color:var(--cream);">Movement Speed:</strong> 600 cm/s</li>
+        <li><strong style="color:var(--cream);">Home Base:</strong> Bakery (Back of House) — mostly desaturated colors, round and chunky shape language, inviting and warm environment</li>
+      </ul>
+      <p style="color:var(--light-neutral); font-size:0.88rem; margin-top:0.5rem; margin-bottom:0;">Francesca Panettiere is a third-generation immigrant raised by her Nonna. Warm, loud, and protective — she sings to her golems while baking them, and turns stone-faced the moment the arena fight begins.</p>
+    </div>
+    <div class="content-card" style="background:var(--near-black); border-color:var(--wood-secondary); margin-bottom:0.75rem;">
+      <h6 style="color:var(--soft-pink); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Camera</h6>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div style="background:var(--dark-accent); border:1px solid var(--wood-secondary); border-radius:6px; padding:0.85rem;">
+            <div style="color:var(--soft-pink); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.4rem;">Bakery</div>
+            <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">Isometric Top-Down — player has no control over camera movement. Camera locks onto player movement to follow behind. Camera-facing walls use occlusion for visibility.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div style="background:var(--dark-accent); border:1px solid var(--wood-secondary); border-radius:6px; padding:0.85rem;">
+            <div style="color:var(--soft-pink); font-size:0.8rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.4rem;">Arena</div>
+            <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">First-Person — player controls camera completely. Camera reacts to certain environmental events. Motion sickness considerations being addressed; railed camera for high-action scenes is a stretch goal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-card" style="background:var(--near-black); border-color:var(--wood-secondary); margin-bottom:0;">
+      <h6 style="color:var(--soft-pink); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.5rem;">Controller Map</h6>
+      <div style="background:var(--dark-accent); border:1px dashed var(--mid-neutral); border-radius:6px; padding:1.25rem; color:var(--mid-neutral); font-size:0.88rem; font-style:italic; text-align:center;">[ Placeholder — bakery and arena controller maps to be added ]</div>
+    </div>
+  </div>
+
+  <div class="content-card" id="market-survey">
+    <h5>&#9670; Market Survey</h5>
+    <div class="competitor-card">
+      <div class="competitor-name">Dave the Diver</div>
+      <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">Shares the day/night split between business management and high-intensity action, but Dough or Die replaces exploration with competitive mech combat and brand-driven progression.</p>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-name">Papa's Games Series</div>
+      <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">Shares tactile recipe-driven production and optimization, but Dough or Die turns the food into autonomous combat units instead of customer orders alone.</p>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-name">Potion Craft</div>
+      <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">Shares hands-on ingredient experimentation and recipe mastery, but Dough or Die ties every recipe directly into real-time combat performance and risk.</p>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-name">Titanfall 2</div>
+      <p style="color:var(--light-neutral); font-size:0.88rem; margin:0;">Shares the feel of piloted mech combat and mobility, but Dough or Die focuses on semi-automated systems and preparation rather than pure skill shooting.</p>
+    </div>
+  </div>
+
+  <hr style="border-color: var(--mid-neutral); margin: 2rem 0;">
+  <div class="d-flex justify-content-between">
+    <a href="toc.html" class="btn btn-outline-wood btn-sm">&#8592; Contents</a>
+    <a href="gameplay.html" class="btn btn-teal btn-sm">Gameplay &rsaquo;</a>
+  </div>
+</div>
+
+<script src="js/popper-2.11.8.min.js"></script>
+<script src="js/bootstrap-5.3.8.js"></script>
+</body>
+</html>

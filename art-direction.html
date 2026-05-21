@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dough or Die — Art Direction</title>
+  <link href="css/bootstrap-5.3.8.css" rel="stylesheet">
+  <style>
+    :root {
+      --wood-primary: #B38864; --wood-secondary: #916440; --light-neutral: #BEAD9C;
+      --mid-neutral: #756A5B; --dark-accent: #3F281B; --near-black: #110A06;
+      --muted-teal: #7FA7A0; --deep-teal: #5F8F87; --dusty-red: #C46A5B;
+      --soft-pink: #E59A8C; --cream: #F2E8DC;
+    }
+    body { background-color: var(--near-black); color: var(--cream); font-family: Georgia, serif; min-height: 100vh; }
+    .navbar { background-color: var(--dark-accent) !important; border-bottom: 1px solid var(--wood-secondary); }
+    .navbar-brand { color: var(--cream) !important; font-size: 1.4rem; }
+    .nav-link { color: var(--light-neutral) !important; }
+    .nav-link:hover { color: var(--muted-teal) !important; }
+    .section-hero { background-color: var(--dark-accent); border-bottom: 1px solid var(--wood-secondary); padding: 2.5rem 0 2rem; }
+    .section-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--muted-teal); color:var(--muted-teal); border-radius:4px; font-size:0.75rem; padding:0.2rem 0.6rem; margin-bottom:0.75rem; }
+    .section-title { color: var(--wood-primary); font-size: 2.2rem; font-weight: bold; }
+    .section-subtitle { color: var(--light-neutral); font-size: 1rem; }
+    .content-card { background-color: var(--dark-accent); border: 1px solid var(--mid-neutral); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .content-card h5 { color: var(--wood-primary); margin-bottom: 0.75rem; font-size: 1rem; }
+    .content-card p { color: var(--light-neutral); font-size: 0.92rem; line-height: 1.7; }
+    .placeholder-block { background-color:var(--near-black); border:1px dashed var(--mid-neutral); border-radius:6px; padding:1.5rem; color:var(--mid-neutral); font-size:0.88rem; font-style:italic; text-align:center; margin-bottom:0.75rem; }
+    .color-swatch { width:48px; height:48px; border-radius:6px; display:inline-block; border:1px solid var(--mid-neutral); }
+    .btn-teal { background-color:var(--muted-teal); border-color:var(--muted-teal); color:var(--near-black); font-weight:bold; }
+    .btn-teal:hover { background-color:var(--deep-teal); color:var(--cream); }
+    .btn-outline-wood { border-color:var(--wood-primary); color:var(--wood-primary); background:transparent; }
+    .btn-outline-wood:hover { background-color:var(--dark-accent); color:var(--cream); }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="index.html">Dough or Die — GDD</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="index.html">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="toc.html">Contents</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="section-hero">
+  <div class="container" style="max-width:800px;">
+    <span class="section-tag">Art Direction</span>
+    <h1 class="section-title">Art Direction</h1>
+    <p class="section-subtitle">Visual identity, mood boards, style, and color palette</p>
+  </div>
+</div>
+
+<div class="container py-4" style="max-width:800px;">
+
+  <div class="content-card">
+    <h5>&#9670; Overview</h5>
+    <p>The original art direction of the project was frankly undefined. The style has always been painterly with some visible stroke variation. However, a definitive target was needed to keep textures cohesive and give the game an identity.</p>
+    <p>The direction chosen follows a muted color palette that gives old bakery vibes. Chunky assets lend themselves to being seen from an isometric view. Consistent light edgewear on all curvature adds detail to the simpler stylized textures. The flatness of the materials (lack of PBR) brings home the more stylized look without accidentally veering into stylized realism.</p>
+  </div>
+
+  <div class="content-card">
+    <h5>&#9670; Target</h5>
+    <div class="placeholder-block">[ Placeholder — art direction target reference images to be added ]</div>
+  </div>
+
+  <div class="content-card">
+    <h5>&#9670; Art Mood Board</h5>
+    <div class="placeholder-block">[ Placeholder — art mood board images to be added ]</div>
+  </div>
+
+  <div class="content-card">
+    <h5>&#9670; Style Mood Board</h5>
+    <div class="placeholder-block">[ Placeholder — style mood board images to be added ]</div>
+  </div>
+
+  <div class="content-card">
+    <h5>&#9670; Color Palette</h5>
+    <p>The game's environment palette is grounded in warm wood tones and deep neutrals, with teal and dusty red used as accent colors for contrast and emphasis.</p>
+    <div class="d-flex flex-wrap gap-3 mt-2">
+      <div class="text-center"><div class="color-swatch" style="background-color:#B38864;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Primary Wood<br>#B38864</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#916440;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Secondary Wood<br>#916440</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#BEAD9C;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Light Neutral<br>#BEAD9C</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#756A5B;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Mid Neutral<br>#756A5B</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#3F281B;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Dark Accent<br>#3F281B</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#110A06;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Near Black<br>#110A06</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#7FA7A0;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Muted Teal<br>#7FA7A0</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#5F8F87;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Deep Teal<br>#5F8F87</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#C46A5B;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Dusty Red<br>#C46A5B</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#E59A8C;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Soft Pink<br>#E59A8C</div></div>
+      <div class="text-center"><div class="color-swatch" style="background-color:#F2E8DC; border-color:#756A5B;"></div><div style="font-size:0.72rem;color:var(--mid-neutral);margin-top:0.3rem;">Cream White<br>#F2E8DC</div></div>
+    </div>
+  </div>
+
+  <hr style="border-color: var(--mid-neutral); margin: 2rem 0;">
+  <div class="d-flex justify-content-between">
+    <a href="narrative.html" class="btn btn-outline-wood btn-sm">&#8592; Narrative</a>
+    <a href="environment.html" class="btn btn-teal btn-sm">Environment &rsaquo;</a>
+  </div>
+</div>
+
+<script src="js/popper-2.11.8.min.js"></script>
+<script src="js/bootstrap-5.3.8.js"></script>
+</body>
+</html>

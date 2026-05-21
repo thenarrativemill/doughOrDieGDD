@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dough or Die — GDD</title>
+  <link href="css/bootstrap-5.3.8.css" rel="stylesheet">
+  <style>
+    :root {
+      --wood-primary: #B38864; --wood-secondary: #916440; --light-neutral: #BEAD9C;
+      --mid-neutral: #756A5B; --dark-accent: #3F281B; --near-black: #110A06;
+      --muted-teal: #7FA7A0; --deep-teal: #5F8F87; --dusty-red: #C46A5B;
+      --soft-pink: #E59A8C; --cream: #F2E8DC;
+    }
+    body { background-color: var(--near-black); color: var(--cream); font-family: Georgia, serif; min-height: 100vh; }
+    .navbar { background-color: var(--dark-accent) !important; border-bottom: 1px solid var(--wood-secondary); }
+    .navbar-brand { color: var(--cream) !important; font-size: 1.4rem; letter-spacing: 0.05em; }
+    .nav-link { color: var(--light-neutral) !important; }
+    .nav-link:hover, .nav-link.active { color: var(--muted-teal) !important; }
+
+    .node-canvas { position: relative; width: 100%; height: calc(100vh - 60px); overflow: hidden; }
+    svg.connections { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    svg.connections line { stroke-width: 1.5; opacity: 0.5; }
+    svg.connections line.hub-line { stroke: var(--mid-neutral); }
+    svg.connections line.cross-line { stroke: var(--muted-teal); opacity: 0.3; stroke-dasharray: 4 4; }
+    svg.connections line.sub-line { stroke: var(--wood-secondary); opacity: 0.5; stroke-dasharray: 3 3; }
+
+    /* Node sizing — three tiers */
+    .node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; font-weight: bold; cursor: pointer;
+      text-align: center; line-height: 1.2; padding: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    }
+    .node:hover { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 0 22px rgba(127,167,160,0.5); }
+    .node-hub {
+      width: 120px; height: 120px;
+      background-color: var(--dark-accent); border: 3px solid var(--wood-primary);
+      color: var(--cream); font-size: 0.9rem;
+      top: 50%; left: 50%; cursor: default;
+    }
+    .node-hub:hover { transform: translate(-50%, -50%) scale(1); box-shadow: none; }
+    .node-section {
+      width: 85px; height: 85px;
+      background-color: var(--dark-accent); border: 2px solid var(--muted-teal);
+      color: var(--cream); font-size: 0.72rem;
+    }
+    .node-section:hover { border-color: var(--soft-pink); color: var(--soft-pink); }
+    .node-sub {
+      width: 62px; height: 62px;
+      background-color: var(--near-black); border: 1.5px solid var(--wood-secondary);
+      color: var(--light-neutral); font-size: 0.62rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.35s;
+    }
+    .node-sub.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .node-sub:hover { border-color: var(--soft-pink); color: var(--soft-pink); }
+
+    /* Toggle button */
+    .expand-toggle {
+      position: fixed; top: 70px; right: 16px; z-index: 100;
+      background-color: var(--dark-accent); border: 1px solid var(--muted-teal);
+      color: var(--muted-teal); border-radius: 6px;
+      padding: 0.4rem 0.75rem; font-size: 0.82rem; cursor: pointer;
+      transition: background 0.2s; user-select: none;
+    }
+    .expand-toggle:hover { background-color: var(--dark-accent); color: var(--cream); border-color: var(--cream); }
+
+    .toc-toggle { position: fixed; top: 70px; left: 16px; z-index: 100; background-color: var(--dark-accent); border: 1px solid var(--wood-primary); color: var(--cream); border-radius: 6px; padding: 0.4rem 0.75rem; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; text-decoration: none; }
+    .toc-toggle:hover { background-color: var(--wood-secondary); color: var(--cream); }
+
+    /* Modals */
+    .modal-content { background-color: var(--dark-accent); border: 1px solid var(--wood-primary); color: var(--cream); }
+    .modal-header { border-bottom: 1px solid var(--wood-secondary); }
+    .modal-title { color: var(--wood-primary); font-size: 1.3rem; }
+    .btn-close { filter: invert(1); }
+    .modal-body p { color: var(--light-neutral); font-size: 0.95rem; line-height: 1.7; }
+    .modal-body .btn-teal { background-color: var(--muted-teal); border-color: var(--muted-teal); color: var(--near-black); font-weight: bold; }
+    .modal-body .btn-teal:hover { background-color: var(--deep-teal); color: var(--cream); }
+    .section-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--muted-teal); color:var(--muted-teal); border-radius:4px; font-size:0.75rem; padding:0.2rem 0.5rem; margin-bottom:0.75rem; }
+    .sub-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--wood-secondary); color:var(--wood-primary); border-radius:4px; font-size:0.72rem; padding:0.15rem 0.45rem; margin-bottom:0.75rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="index.html">Dough or Die — GDD</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="toc.html">Contents</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<a href="toc.html" class="toc-toggle">&#9776; Contents</a>
+<button class="expand-toggle" id="expandToggle" onclick="toggleExpand()">&#9635; Expand All</button>
+
+<div class="node-canvas" id="nodeCanvas">
+  <svg class="connections" id="svgLines"></svg>
+
+  <!-- Hub -->
+  <div class="node node-hub" id="hub">Dough<br>or Die</div>
+
+  <!-- Main section nodes -->
+  <div class="node node-section" id="nodeOverview"     data-bs-toggle="modal" data-bs-target="#modalOverview">Overview</div>
+  <div class="node node-section" id="nodeGameplay"     data-bs-toggle="modal" data-bs-target="#modalGameplay">Gameplay</div>
+  <div class="node node-section" id="nodeSystems"      data-bs-toggle="modal" data-bs-target="#modalSystems">Systems</div>
+  <div class="node node-section" id="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalLevelProg">Level<br>Progression</div>
+  <div class="node node-section" id="nodeNarrative"    data-bs-toggle="modal" data-bs-target="#modalNarrative">Narrative</div>
+  <div class="node node-section" id="nodeArtDir"       data-bs-toggle="modal" data-bs-target="#modalArtDir">Art<br>Direction</div>
+  <div class="node node-section" id="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalEnvironment">Environment</div>
+  <div class="node node-section" id="nodeCharacters"   data-bs-toggle="modal" data-bs-target="#modalCharacters">Characters</div>
+  <div class="node node-section" id="nodeUI"           data-bs-toggle="modal" data-bs-target="#modalUI">User<br>Interface</div>
+
+  <!-- Overview subsection nodes -->
+  <div class="node node-sub" id="subGameCore"        data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalGameCore">Game<br>Core</div>
+  <div class="node node-sub" id="subAudience"        data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalAudience">Audience &amp;<br>Playstyle</div>
+  <div class="node node-sub" id="subMarket"          data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalMarket">Market<br>Survey</div>
+  <div class="node node-sub" id="subThreeCs"         data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalThreeCs">3 C's</div>
+</div>
+
+<!-- ===== SECTION MODALS ===== -->
+
+<div class="modal fade" id="modalOverview" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Overview</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Core</span>
+      <p>Dough or Die is a stylized action game where a bakery owner survives supernatural arena combat by night using enchanted recipes and baked golem companions.</p>
+      <p>Covers the game's core concept, target audience, playstyle, and market survey.</p>
+      <a href="overview.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalGameplay" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Gameplay</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Core</span>
+      <p>Players manage their bakery by day and fight in the arena by night using crafted weapons and recipes.</p>
+      <p>Details the 3 C's, core mechanics, player goals, and the gameplay loop.</p>
+      <a href="gameplay.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalSystems" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Systems</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Mechanics</span>
+      <p>All interlocking game systems: ingredients, recipes, golems, perks, reputation, ordering, grading, combat, and enemy AI.</p>
+      <a href="systems.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalLevelProg" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Level Progression</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Structure</span>
+      <p>Outlines what a typical day looks like, the demo structure, and the overall story premise.</p>
+      <a href="level-progression.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalNarrative" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Narrative</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Narrative</span>
+      <p>Covers the story overview, tone, themes, and the emotional target the narrative aims to deliver to the player.</p>
+      <a href="narrative.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalArtDir" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Art Direction</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Art Direction</span>
+      <p>Defines the game's visual identity through art and style mood boards and the full environment color palette.</p>
+      <a href="art-direction.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalEnvironment" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Environment</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Environment</span>
+      <p>Documents materials, the bakery day environment, the arena night environment, and key environmental props.</p>
+      <a href="environment.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalCharacters" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Characters</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">Characters</span>
+      <p>Covers the main character, golem companion designs, and the NPC cast including customers and story characters.</p>
+      <a href="characters.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalUI" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">User Interface</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="section-tag">User Interface</span>
+      <p>HUD design for both the bakery day phase and the arena night phase, designed to serve gameplay without cluttering the screen.</p>
+      <a href="user-interface.html" class="btn btn-teal btn-sm mt-1">View Full Section &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- ===== SUBSECTION MODALS — Overview ===== -->
+
+<div class="modal fade" id="modalThreeCs" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">The 3 C's</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Overview</span>
+      <p><strong style="color:var(--cream);">Character:</strong> Francesca "Fran" Panettiere — 5'3", warm and protective, third-generation immigrant raised by her Nonna in the bakery.</p>
+      <p><strong style="color:var(--cream);">Camera:</strong> Isometric Top-Down in the bakery, First-Person in the arena.</p>
+      <p><strong style="color:var(--cream);">Controls:</strong> Bakery and arena controller maps to be added.</p>
+      <a href="overview.html#three-cs" class="btn btn-teal btn-sm mt-1">View in Overview &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Game Core</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Overview</span>
+      <p>In a world where your finest ingredients are either your greatest profit or your deadliest weapon, every recipe is a choice between a thriving shop and a winning fighter.</p>
+      <p>Players manage baking for customers and bake their bread golems during the day, then fight other bakers' golems in the Dough Brawl Arena after closing.</p>
+      <a href="overview.html#game-core" class="btn btn-teal btn-sm mt-1">View in Overview &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalAudience" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Audience & Playstyle</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Overview</span>
+      <p>Target audience: teen+, casual and core gamers, streamers, and people with interests in baking, mechs, fighting games, and sims.</p>
+      <p>Playstyle targets the <strong style="color:var(--cream);">Mastermind</strong> archetype and <strong style="color:var(--cream);">Challenge, Fantasy, and Expression</strong> pleasures from LeBlanc's taxonomy.</p>
+      <a href="overview.html#audience-playstyle" class="btn btn-teal btn-sm mt-1">View in Overview &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<div class="modal fade" id="modalMarket" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Market Survey</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Overview</span>
+      <p>Comparable titles include Dave the Diver (day/night split), Papa's Games (recipe-driven production), Potion Craft (ingredient experimentation), and Titanfall 2 (mech combat feel).</p>
+      <p>Dough or Die differentiates through its baking-as-combat mechanic and community-rooted brand identity.</p>
+      <a href="overview.html#market-survey" class="btn btn-teal btn-sm mt-1">View in Overview &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<script src="js/popper-2.11.8.min.js"></script>
+<script src="js/bootstrap-5.3.8.js"></script>
+<script>
+  // ── Config ──────────────────────────────────────────────
+  const nodeConfig = [
+    { id: 'nodeOverview',    angle: -90  },
+    { id: 'nodeGameplay',    angle: -50  },
+    { id: 'nodeSystems',     angle: -10  },
+    { id: 'nodeLevelProg',   angle: 30   },
+    { id: 'nodeNarrative',   angle: 70   },
+    { id: 'nodeArtDir',      angle: 110  },
+    { id: 'nodeEnvironment', angle: 150  },
+    { id: 'nodeCharacters',  angle: 190  },
+    { id: 'nodeUI',          angle: -130 },
+  ];
+
+  // Cross-connections between section nodes
+  const crossLinks = [
+    ['nodeGameplay',    'nodeSystems'],
+    ['nodeSystems',     'nodeLevelProg'],
+    ['nodeLevelProg',   'nodeNarrative'],
+    ['nodeNarrative',   'nodeCharacters'],
+    ['nodeArtDir',      'nodeEnvironment'],
+    ['nodeArtDir',      'nodeCharacters'],
+    ['nodeEnvironment', 'nodeCharacters'],
+    ['nodeUI',          'nodeGameplay'],
+  ];
+
+  // Subsection definitions — angle is relative to parent node, outward from hub
+  const subConfig = [
+    { id: 'subGameCore',  parent: 'nodeOverview', relAngle: -60 },
+    { id: 'subThreeCs',   parent: 'nodeOverview', relAngle: -20 },
+    { id: 'subAudience',  parent: 'nodeOverview', relAngle: 20  },
+    { id: 'subMarket',    parent: 'nodeOverview', relAngle: 60  },
+  ];
+
+  const SUB_RADIUS = 115; // distance from parent node to sub node
+  const HUB_RADIUS_RATIO = 0.24;
+
+  let positions = {};       // all node positions
+  let expandedAll = false;  // toggle state
+  let activeParent = null;  // which parent was clicked in Focused mode
+
+  // ── Layout ───────────────────────────────────────────────
+  function layoutNodes() {
+    const canvas = document.getElementById('nodeCanvas');
+    const svg    = document.getElementById('svgLines');
+    const W = canvas.offsetWidth;
+    const H = canvas.offsetHeight;
+    const cx = W / 2, cy = H / 2;
+    const radius = Math.min(W, H) * HUB_RADIUS_RATIO;
+
+    document.getElementById('hub').style.left = cx + 'px';
+    document.getElementById('hub').style.top  = cy + 'px';
+    positions['hub'] = { x: cx, y: cy };
+
+    svg.innerHTML = '';
+
+    // Place main section nodes & draw hub lines
+    nodeConfig.forEach(n => {
+      const el  = document.getElementById(n.id);
+      const rad = n.angle * Math.PI / 180;
+      const nx  = cx + radius * Math.cos(rad);
+      const ny  = cy + radius * Math.sin(rad);
+      el.style.left = nx + 'px';
+      el.style.top  = ny + 'px';
+      positions[n.id] = { x: nx, y: ny, angle: n.angle };
+
+      drawLine(svg, cx, cy, nx, ny, 'hub-line');
+    });
+
+    // Place subsection nodes
+    subConfig.forEach(s => {
+      const parent = positions[s.parent];
+      const parentAngle = parent.angle; // outward angle from hub
+      const subAngle = (parentAngle + s.relAngle) * Math.PI / 180;
+      const sx = parent.x + SUB_RADIUS * Math.cos(subAngle);
+      const sy = parent.y + SUB_RADIUS * Math.sin(subAngle);
+      const el = document.getElementById(s.id);
+      el.style.left = sx + 'px';
+      el.style.top  = sy + 'px';
+      positions[s.id] = { x: sx, y: sy, parentId: s.parent };
+    });
+
+    // Draw cross-connection lines
+    crossLinks.forEach(([a, b]) => {
+      const pa = positions[a], pb = positions[b];
+      if (pa && pb) drawLine(svg, pa.x, pa.y, pb.x, pb.y, 'cross-line');
+    });
+
+    // Redraw sub-lines for visible subs
+    redrawSubLines(svg);
+  }
+
+  function drawLine(svg, x1, y1, x2, y2, cls) {
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+    line.setAttribute('class', cls);
+    svg.appendChild(line);
+    return line;
+  }
+
+  function redrawSubLines(svg) {
+    // Remove old sub-lines
+    svg.querySelectorAll('.sub-line').forEach(l => l.remove());
+    // Draw lines for currently visible subs
+    subConfig.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (el.classList.contains('visible')) {
+        const ps = positions[s.id];
+        const pp = positions[s.parent];
+        drawLine(svg, pp.x, pp.y, ps.x, ps.y, 'sub-line');
+      }
+    });
+  }
+
+  // ── Visibility helpers ───────────────────────────────────
+  function showSubsOf(parentId) {
+    subConfig.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (s.parent === parentId) el.classList.add('visible');
+      else if (!expandedAll)     el.classList.remove('visible');
+    });
+    redrawSubLines(document.getElementById('svgLines'));
+  }
+
+  function hideAllSubs() {
+    subConfig.forEach(s => document.getElementById(s.id).classList.remove('visible'));
+    redrawSubLines(document.getElementById('svgLines'));
+  }
+
+  function showAllSubs() {
+    subConfig.forEach(s => document.getElementById(s.id).classList.add('visible'));
+    redrawSubLines(document.getElementById('svgLines'));
+  }
+
+  // ── Toggle button ────────────────────────────────────────
+  function toggleExpand() {
+    expandedAll = !expandedAll;
+    const btn = document.getElementById('expandToggle');
+    if (expandedAll) {
+      showAllSubs();
+      btn.textContent = '⊟ Collapse All';
+      activeParent = null;
+    } else {
+      hideAllSubs();
+      btn.textContent = '⊞ Expand All';
+    }
+  }
+
+  // ── Click parent node to reveal subs (Focused mode) ──────
+  nodeConfig.forEach(n => {
+    const hasChildren = subConfig.some(s => s.parent === n.id);
+    if (!hasChildren) return;
+
+    document.getElementById(n.id).addEventListener('click', function(e) {
+      if (expandedAll) return; // in Expanded mode the toggle handles it
+      if (activeParent === n.id) {
+        hideAllSubs();
+        activeParent = null;
+      } else {
+        showSubsOf(n.id);
+        activeParent = n.id;
+      }
+    }, true); // capture phase so it fires before Bootstrap modal
+  });
+
+  // ── Init ─────────────────────────────────────────────────
+  layoutNodes();
+  window.addEventListener('resize', layoutNodes);
+</script>
+</body>
+</html>

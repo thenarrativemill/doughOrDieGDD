@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dough or Die — Systems</title>
+  <link href="css/bootstrap-5.3.8.css" rel="stylesheet">
+  <style>
+    :root {
+      --wood-primary: #B38864; --wood-secondary: #916440; --light-neutral: #BEAD9C;
+      --mid-neutral: #756A5B; --dark-accent: #3F281B; --near-black: #110A06;
+      --muted-teal: #7FA7A0; --deep-teal: #5F8F87; --dusty-red: #C46A5B;
+      --soft-pink: #E59A8C; --cream: #F2E8DC;
+    }
+    body { background-color: var(--near-black); color: var(--cream); font-family: Georgia, serif; min-height: 100vh; }
+    .navbar { background-color: var(--dark-accent) !important; border-bottom: 1px solid var(--wood-secondary); }
+    .navbar-brand { color: var(--cream) !important; font-size: 1.4rem; }
+    .nav-link { color: var(--light-neutral) !important; }
+    .nav-link:hover { color: var(--muted-teal) !important; }
+    .section-hero { background-color: var(--dark-accent); border-bottom: 1px solid var(--wood-secondary); padding: 2.5rem 0 2rem; }
+    .section-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--muted-teal); color:var(--muted-teal); border-radius:4px; font-size:0.75rem; padding:0.2rem 0.6rem; margin-bottom:0.75rem; }
+    .section-title { color: var(--wood-primary); font-size: 2.2rem; font-weight: bold; }
+    .section-subtitle { color: var(--light-neutral); font-size: 1rem; }
+    .content-card { background-color: var(--dark-accent); border: 1px solid var(--mid-neutral); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .content-card h5 { color: var(--wood-primary); margin-bottom: 0.75rem; font-size: 1rem; }
+    .content-card p, .content-card li { color: var(--light-neutral); font-size: 0.92rem; line-height: 1.7; }
+    .content-card ul { padding-left: 1.25rem; }
+    .filter-chip { display:inline-block; background-color:var(--near-black); border:1px solid var(--wood-secondary); color:var(--light-neutral); border-radius:20px; padding:0.3rem 0.85rem; font-size:0.82rem; margin:0.2rem; cursor:pointer; transition: border-color 0.15s, color 0.15s, background 0.15s; user-select:none; }
+    .filter-chip:hover { border-color:var(--muted-teal); color:var(--cream); }
+    .filter-chip.active { background-color:var(--muted-teal); border-color:var(--muted-teal); color:var(--near-black); font-weight:bold; }
+    .system-card { background-color:var(--dark-accent); border:1px solid var(--mid-neutral); border-radius:8px; padding:1.25rem 1.5rem; margin-bottom:1rem; transition:border-color 0.2s; }
+    .system-card:hover { border-color:var(--wood-primary); }
+    .system-card h5 { color:var(--soft-pink); font-size:1rem; margin-bottom:0.6rem; }
+    .system-card p, .system-card li { color:var(--light-neutral); font-size:0.92rem; line-height:1.7; }
+    .system-card ul { padding-left:1.25rem; }
+    .connects-to { font-size:0.8rem; color:var(--muted-teal); margin-top:0.4rem; }
+    .ingredient-tag { display:inline-block; background-color:var(--near-black); border:1px solid var(--wood-secondary); color:var(--light-neutral); border-radius:4px; padding:0.2rem 0.6rem; font-size:0.8rem; margin:0.2rem; }
+    .recipe-row { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid var(--near-black); font-size:0.88rem; }
+    .recipe-row:last-child { border-bottom:none; }
+    .recipe-name { color:var(--cream); font-weight:bold; }
+    .recipe-ingredients { color:var(--light-neutral); font-size:0.82rem; }
+    .golem-card { background-color:var(--near-black); border:1px solid var(--wood-secondary); border-radius:6px; padding:1rem; margin-bottom:0.75rem; }
+    .golem-name { color:var(--wood-primary); font-weight:bold; margin-bottom:0.4rem; }
+    .ability-tag { display:inline-block; background-color:var(--dark-accent); border:1px solid var(--muted-teal); color:var(--muted-teal); border-radius:4px; padding:0.15rem 0.5rem; font-size:0.78rem; margin:0.15rem; }
+    .perk-item { padding:0.5rem 0; border-bottom:1px solid var(--near-black); }
+    .perk-item:last-child { border-bottom:none; }
+    .perk-name { color:var(--cream); font-weight:bold; font-size:0.9rem; }
+    .perk-tier { color:var(--light-neutral); font-size:0.83rem; }
+    .tier-badge { display:inline-block; background-color:var(--near-black); border:1px solid var(--wood-secondary); color:var(--wood-primary); border-radius:3px; font-size:0.72rem; padding:0.1rem 0.4rem; margin-right:0.3rem; }
+    .btn-teal { background-color:var(--muted-teal); border-color:var(--muted-teal); color:var(--near-black); font-weight:bold; }
+    .btn-teal:hover { background-color:var(--deep-teal); color:var(--cream); }
+    .btn-outline-wood { border-color:var(--wood-primary); color:var(--wood-primary); background:transparent; }
+    .btn-outline-wood:hover { background-color:var(--dark-accent); color:var(--cream); }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md">
+  <div class="container-fluid px-4">
+    <a class="navbar-brand fw-bold" href="index.html">Dough or Die — GDD</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="index.html">Map</a></li>
+        <li class="nav-item"><a class="nav-link" href="toc.html">Contents</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="section-hero">
+  <div class="container" style="max-width:800px;">
+    <span class="section-tag">Mechanics</span>
+    <h1 class="section-title">Systems</h1>
+    <p class="section-subtitle">All interlocking game systems — filter by name or view all</p>
+  </div>
+</div>
+
+<div class="container py-4" style="max-width:800px;">
+
+  <div class="mb-4">
+    <span class="filter-chip active" onclick="filterSystems('all',this)">All</span>
+    <span class="filter-chip" onclick="filterSystems('ingredients',this)">Ingredients</span>
+    <span class="filter-chip" onclick="filterSystems('recipes',this)">Recipes</span>
+    <span class="filter-chip" onclick="filterSystems('golems',this)">Golems</span>
+    <span class="filter-chip" onclick="filterSystems('perks',this)">Perks</span>
+    <span class="filter-chip" onclick="filterSystems('reputation',this)">Reputation</span>
+    <span class="filter-chip" onclick="filterSystems('ordering',this)">Customer Ordering</span>
+    <span class="filter-chip" onclick="filterSystems('grading',this)">Customer Grading</span>
+    <span class="filter-chip" onclick="filterSystems('combat',this)">Combat</span>
+    <span class="filter-chip" onclick="filterSystems('enemyai',this)">Enemy AI</span>
+  </div>
+
+  <!-- Ingredients -->
+  <div class="system-card" data-system="ingredients">
+    <h5>&#9670; Ingredients</h5>
+    <p><strong style="color:var(--cream);">Base Ingredients:</strong></p>
+    <div class="mb-2">
+      <span class="ingredient-tag">Flour</span><span class="ingredient-tag">Water</span><span class="ingredient-tag">Milk</span><span class="ingredient-tag">Butter</span><span class="ingredient-tag">Oil</span><span class="ingredient-tag">Sugar</span><span class="ingredient-tag">Salt</span><span class="ingredient-tag">Eggs</span><span class="ingredient-tag">Yeast</span>
+    </div>
+    <p><strong style="color:var(--cream);">Special Ingredients</strong> — when added to your pastry golem, you get a different combat ability:</p>
+    <ul>
+      <li><strong style="color:var(--soft-pink);">Chocolate:</strong> Leap forward and smash the ground releasing a shockwave of chocolate shards and briefly stunning the enemy.</li>
+      <li><strong style="color:var(--soft-pink);">Cream Cheese:</strong> Adds a shield ability that absorbs incoming damage and reflects a percentage back to the attacker — like thorns.</li>
+      <li><strong style="color:var(--soft-pink);">Almonds:</strong> Charge a heavy uppercut that increases attack damage briefly and knocks back enemies.</li>
+      <li><strong style="color:var(--soft-pink);">Blueberries:</strong> Fire a rapid spread of blueberry projectiles that arc slightly and splatter on impact, damaging enemies in a small area.</li>
+    </ul>
+    <div class="connects-to">&#8594; Connects to: Recipes, Golems, Combat</div>
+  </div>
+
+  <!-- Recipes -->
+  <div class="system-card" data-system="recipes">
+    <h5>&#9670; Recipes</h5>
+    <p style="color:var(--mid-neutral); font-size:0.85rem; margin-bottom:0.75rem;">Customer & Golem Recipes</p>
+    <div class="recipe-row"><span class="recipe-name">Sourdough</span><span class="recipe-ingredients">Flour/Water Base + Salt + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Croissant</span><span class="recipe-ingredients">Flour/Water Base + Butter + Sugar + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Simit</span><span class="recipe-ingredients">Flour/Water Base + Oil + Sugar + Salt + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Grissini</span><span class="recipe-ingredients">Flour/Water Base + Oil + Salt + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Injera</span><span class="recipe-ingredients">Flour/Water Base + Oil + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Arepa</span><span class="recipe-ingredients">Flour/Water Base + Butter + Salt</span></div>
+    <div class="recipe-row"><span class="recipe-name">Pao De Quiejo</span><span class="recipe-ingredients">Flour/Water Base + Oil + Salt + Eggs</span></div>
+    <div class="recipe-row"><span class="recipe-name">Melonpan</span><span class="recipe-ingredients">Flour/Milk Base + Butter + Sugar + Eggs + Yeast</span></div>
+    <p style="color:var(--mid-neutral); font-size:0.85rem; margin:1rem 0 0.75rem;">Customer Recipes Only</p>
+    <div class="recipe-row"><span class="recipe-name">Muffin</span><span class="recipe-ingredients">Flour/Milk Base + Oil + Eggs + Yeast</span></div>
+    <div class="recipe-row"><span class="recipe-name">Babka</span><span class="recipe-ingredients">Flour/Milk Base + Butter + Sugar + Salt + Eggs + Yeast + Chocolate</span></div>
+    <div class="recipe-row"><span class="recipe-name">Brownies</span><span class="recipe-ingredients">Flour/Milk Base + Butter + Sugar + Salt + Eggs + Chocolate</span></div>
+    <div class="recipe-row"><span class="recipe-name">Cinnamon Roll</span><span class="recipe-ingredients">Flour/Milk Base + Sugar + Salt + Eggs + Yeast + Cream Cheese</span></div>
+    <div class="recipe-row"><span class="recipe-name">Cannoli</span><span class="recipe-ingredients">Flour/Milk Base + Oil + Sugar + Salt + Cream Cheese</span></div>
+    <div class="connects-to">&#8594; Connects to: Ingredients, Customer Ordering, Combat</div>
+  </div>
+
+  <!-- Golems -->
+  <div class="system-card" data-system="golems">
+    <h5>&#9670; Golems</h5>
+    <div class="golem-card">
+      <div class="golem-name">Sourdough</div>
+      <p style="color:var(--light-neutral); font-size:0.87rem;">Slow to rise but impossible to rush, this hardy construct hardens its crust under pressure and slams the ground with earthshaking force. It doesn't fight for spectacle — it fights to endure.</p>
+      <span class="ability-tag">Get Baked: ½ damage for 5s</span><span class="ability-tag">Break Bread: Stagger enemy 1s</span>
+    </div>
+    <div class="golem-card">
+      <div class="golem-name">Croissant</div>
+      <p style="color:var(--light-neutral); font-size:0.87rem;">Layered and lightning-fast, it reinforces its strikes before slipping away in a storm of flakes. Blink and you'll miss it, but you'll feel where it hit.</p>
+      <span class="ability-tag">Wrap Em Up: Increased punch damage 5s</span><span class="ability-tag">Expe-dough-tious Retreat: Speed boost 3s</span>
+    </div>
+    <div class="golem-card">
+      <div class="golem-name">Grissini</div>
+      <p style="color:var(--light-neutral); font-size:0.87rem;">Quick, sharp, and unyielding — it pierces defenses and controls the pace of battle with calculated strikes. Where others brawl, Grissini duels.</p>
+      <span class="ability-tag">Scoring: 3 projectiles, slow enemy 3s</span><span class="ability-tag">Lunge: Pierce through enemy</span>
+    </div>
+    <div class="golem-card">
+      <div class="golem-name">Arepa</div>
+      <p style="color:var(--light-neutral); font-size:0.87rem;">Scattering explosive rounds and yanking foes into close quarters, it turns the battlefield into its own kitchen. Simple at first glance, surprisingly tricky in a fight.</p>
+      <span class="ability-tag">More of Me: 3 mines, 10 blast dmg</span><span class="ability-tag">Cheese Pull: Grapple enemy toward you</span>
+    </div>
+    <div class="connects-to">&#8594; Connects to: Ingredients, Combat, Perks</div>
+  </div>
+
+  <!-- Perks -->
+  <div class="system-card" data-system="perks">
+    <h5>&#9670; Perks</h5>
+    <p style="color:var(--mid-neutral); font-size:0.85rem; margin-bottom:0.75rem;">Arena Perks</p>
+    <div class="perk-item"><div class="perk-name">Sugar Fiend</div><div class="perk-tier"><span class="tier-badge">I</span>10% move speed &nbsp;<span class="tier-badge">II</span>15% &nbsp;<span class="tier-badge">III</span>20%</div></div>
+    <div class="perk-item"><div class="perk-name">Baked Different</div><div class="perk-tier"><span class="tier-badge">I</span>10% damage reduction &nbsp;<span class="tier-badge">II</span>15%</div></div>
+    <div class="perk-item"><div class="perk-name">That Was Close</div><div class="perk-tier">If health reaches 35%, gain a shield for 5 seconds.</div></div>
+    <div class="perk-item"><div class="perk-name">Training Day</div><div class="perk-tier"><span class="tier-badge">I</span>5% attack speed &nbsp;<span class="tier-badge">II</span>10% &nbsp;<span class="tier-badge">III</span>15%</div></div>
+    <div class="perk-item"><div class="perk-name">Out Cold</div><div class="perk-tier">Attacks that deal knockback also stun the enemy for 2 seconds.</div></div>
+    <div class="perk-item"><div class="perk-name">Lingering Heat</div><div class="perk-tier">Staying within 10 feet of the enemy slowly drains their HP.</div></div>
+    <div class="perk-item"><div class="perk-name">Prime Proof</div><div class="perk-tier">Deal 20% more damage while at full health.</div></div>
+    <div class="perk-item"><div class="perk-name">Quick to Rise</div><div class="perk-tier">Your abilities have 10% reduced cooldowns.</div></div>
+    <div class="perk-item"><div class="perk-name">Proof in Place</div><div class="perk-tier">Standing still briefly increases damage dealt by 1.25x.</div></div>
+    <p style="color:var(--mid-neutral); font-size:0.85rem; margin:1rem 0 0.75rem;">Bakery Perks</p>
+    <div class="perk-item"><div class="perk-name">Butter 'Em Up</div><div class="perk-tier">Customer patience drains 10% slower.</div></div>
+    <div class="perk-item"><div class="perk-name">Word Gets Around</div><div class="perk-tier">20% increase in customers.</div></div>
+    <div class="perk-item"><div class="perk-name">Hot Ovens</div><div class="perk-tier">Bread bake time reduced by 20%.</div></div>
+    <div class="perk-item"><div class="perk-name">Golden Reputation</div><div class="perk-tier">Increase reputation gain by 10%.</div></div>
+    <div class="perk-item"><div class="perk-name">Sugar Fiend (Bakery)</div><div class="perk-tier">Increase player movement speed by 20%.</div></div>
+    <div class="connects-to">&#8594; Connects to: Reputation, Golems</div>
+  </div>
+
+  <!-- Reputation -->
+  <div class="system-card" data-system="reputation">
+    <h5>&#9670; Reputation System</h5>
+    <p>There are two types of reputation: <strong style="color:var(--cream);">Momentum</strong> (Daily) and <strong style="color:var(--cream);">Renown</strong> (Permanent).</p>
+    <p><strong style="color:var(--soft-pink);">Momentum</strong> reflects how well you serve customers during the day. It is earned through efficiency and quality of performance and <em>resets at the start of each new day</em>. At the end of the day, Momentum grants immediate advantages in the upcoming golem fight — extra ability charges, reduced cooldowns, temporary stat boosts, and bonus combat modifiers.</p>
+    <p><strong style="color:var(--soft-pink);">Renown</strong> is the cumulative reputation you gain throughout your entire playthrough. It unlocks persistent bakery-focused upgrades: low-level automation, access to higher-quality ingredients, and bakery safety nets that soften mistakes.</p>
+    <p>Your daily Momentum is graded on a scale of: <strong style="color:var(--cream);">Terrible → Poor → Okay → Great → Excellent</strong> (0–4 points). Winning an arena fight nets 6 renown points — 1.5x the maximum daily bakery performance.</p>
+    <div class="connects-to">&#8594; Connects to: Customer Grading, Perks, Level Progression</div>
+  </div>
+
+  <!-- Customer Ordering -->
+  <div class="system-card" data-system="ordering">
+    <h5>&#9670; Customer Ordering System</h5>
+    <p>Day one starts with 3 customers. Each day a random growth percentage between 8–15% is chosen. Once the customer count reaches 18 or higher, growth plateaus. In late game, the daily count is randomly chosen between 18–25 customers.</p>
+    <p>Starting Day 3, a randomly chosen recipe forces 60% of customers to order it. The other 40% order randomly. When the first special ingredient is unlocked, customers have a 10% chance to request it with their order. This increases to 15% after the second unlock, and 25% after the third.</p>
+    <p><strong style="color:var(--cream);">Exceptions</strong> — these recipes require their special ingredient and are exempt from optional adds:</p>
+    <ul>
+      <li>Babka: Chocolate (required)</li>
+      <li>Brownies: Chocolate (required)</li>
+      <li>Cinnamon Roll: Cream Cheese (required)</li>
+      <li>Cannoli: Cream Cheese (required)</li>
+    </ul>
+    <div class="connects-to">&#8594; Connects to: Recipes, Customer Grading, Reputation</div>
+  </div>
+
+  <!-- Customer Grading -->
+  <div class="system-card" data-system="grading">
+    <h5>&#9670; Customer Grading System</h5>
+    <p>When customers walk up to your counter they have a patience bar for being attended to. After taking their order, a new patience bar begins for how long it takes to receive the order. The bar dwindles as you work. Once you give them their order, the bar stops — the percentage remaining is your score for their patience.</p>
+    <div class="connects-to">&#8594; Connects to: Customer Ordering, Reputation</div>
+  </div>
+
+  <!-- Combat -->
+  <div class="system-card" data-system="combat">
+    <h5>&#9670; Combat System</h5>
+    <p>The modular combat system is split into three actor components (AC):</p>
+    <ul>
+      <li><strong style="color:var(--cream);">Combat AC:</strong> Animations, bones (to know the hit result), and damage being afflicted.</li>
+      <li><strong style="color:var(--cream);">Health AC:</strong> Health information, UI, and hit react animations.</li>
+      <li><strong style="color:var(--cream);">Hit Stop AC:</strong> Applies time dilation when you or the enemy are struck for visual feedback.</li>
+    </ul>
+    <div class="connects-to">&#8594; Connects to: Golems, Enemy AI, Ingredients</div>
+  </div>
+
+  <!-- Enemy AI -->
+  <div class="system-card" data-system="enemyai">
+    <h5>&#9670; Enemy AI</h5>
+    <div style="background-color:var(--near-black); border:1px dashed var(--mid-neutral); border-radius:6px; padding:1.25rem; color:var(--mid-neutral); font-size:0.88rem; font-style:italic; text-align:center;">[ Enemy AI details to be added ]</div>
+    <div class="connects-to">&#8594; Connects to: Combat, Level Progression</div>
+  </div>
+
+  <hr style="border-color: var(--mid-neutral); margin: 2rem 0;">
+  <div class="d-flex justify-content-between">
+    <a href="gameplay.html" class="btn btn-outline-wood btn-sm">&#8592; Gameplay</a>
+    <a href="level-progression.html" class="btn btn-teal btn-sm">Level Progression &rsaquo;</a>
+  </div>
+</div>
+
+<script src="js/popper-2.11.8.min.js"></script>
+<script src="js/bootstrap-5.3.8.js"></script>
+<script>
+  function filterSystems(key, el) {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.system-card').forEach(card => {
+      card.style.display = (key === 'all' || card.dataset.system === key) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

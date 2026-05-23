@@ -17,13 +17,81 @@
     .navbar-brand { color: var(--cream) !important; font-size: 1.4rem; }
     .nav-link { color: var(--light-neutral) !important; }
     .nav-link:hover, .nav-link.active { color: var(--muted-teal) !important; }
-    .toc-section-header { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid-neutral); padding: 1.25rem 0 0.4rem; border-top: 1px solid var(--dark-accent); margin-top: 0.5rem; }
-    .toc-section-header:first-of-type { border-top: none; padding-top: 0; }
-    .toc-item { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-radius:6px; margin-bottom:0.4rem; text-decoration:none; color:var(--light-neutral); background-color:var(--dark-accent); border:1px solid transparent; transition: border-color 0.2s, color 0.2s; }
-    .toc-item:hover { border-color: var(--muted-teal); color: var(--cream); }
-    .toc-item .toc-name { font-size: 0.95rem; }
-    .toc-item .toc-arrow { color: var(--mid-neutral); font-size: 0.85rem; }
+
+    /* Section row — wraps chevron + link side by side */
+    .toc-row {
+      display: flex;
+      align-items: stretch;
+      margin-bottom: 0.4rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .toc-row:hover { border-color: var(--muted-teal); }
+
+    /* Chevron toggle button */
+    .toc-chevron {
+      background-color: var(--dark-accent);
+      border: none;
+      border-right: 1px solid var(--near-black);
+      color: var(--mid-neutral);
+      padding: 0 0.9rem;
+      cursor: pointer;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .toc-chevron:hover { color: var(--muted-teal); background-color: var(--near-black); }
+    .toc-chevron.open { color: var(--wood-primary); }
+    .toc-chevron .chevron-icon {
+      display: inline-block;
+      transition: transform 0.25s ease;
+    }
+    .toc-chevron.open .chevron-icon { transform: rotate(90deg); }
+
+    /* Section link */
+    .toc-item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      color: var(--light-neutral);
+      background-color: var(--dark-accent);
+      transition: color 0.2s;
+      font-size: 0.95rem;
+    }
+    .toc-item:hover { color: var(--cream); }
+    .toc-arrow { color: var(--mid-neutral); font-size: 0.85rem; }
     .toc-item:hover .toc-arrow { color: var(--muted-teal); }
+
+    /* Subsection list */
+    .toc-subs {
+      display: none;
+      margin-bottom: 0.4rem;
+      margin-left: 2.5rem;
+      border-left: 2px solid var(--wood-secondary);
+      padding-left: 0;
+    }
+    .toc-subs.open { display: block; }
+    .toc-sub-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: var(--light-neutral);
+      font-size: 0.87rem;
+      border-radius: 0 4px 4px 0;
+      transition: color 0.15s, background 0.15s;
+    }
+    .toc-sub-item:hover { color: var(--cream); background-color: var(--dark-accent); }
+    .toc-sub-arrow { color: var(--mid-neutral); font-size: 0.78rem; }
+    .toc-sub-item:hover .toc-sub-arrow { color: var(--muted-teal); }
   </style>
 </head>
 <body>
@@ -42,28 +110,120 @@
 
 <div class="container py-4" style="max-width: 680px;">
   <h2 class="fw-bold mb-1" style="color:var(--wood-primary);">Table of Contents</h2>
-  <p style="color:var(--mid-neutral); font-size:0.88rem;" class="mb-4">Click a section to go to its full page.</p>
+  <p style="color:var(--mid-neutral); font-size:0.88rem;" class="mb-4">Click a section title to go to its full page. Click &#9656; to expand subsections.</p>
 
-  <a href="overview.html" class="toc-item"><span class="toc-name">Overview</span><span class="toc-arrow">&#8594;</span></a>
-  <a href="gameplay.html" class="toc-item"><span class="toc-name">Gameplay</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Overview -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('overview-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="overview.html" class="toc-item"><span>Overview</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="overview-subs">
+    <a href="overview.html#game-core"         class="toc-sub-item"><span>Game Core</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="overview.html#three-cs"          class="toc-sub-item"><span>The 3 C's</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="overview.html#audience-playstyle" class="toc-sub-item"><span>Audience & Playstyle</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="overview.html#market-survey"     class="toc-sub-item"><span>Market Survey</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="systems.html" class="toc-item"><span class="toc-name">Systems</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Gameplay -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('gameplay-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="gameplay.html" class="toc-item"><span>Gameplay</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="gameplay-subs">
+    <a href="gameplay.html#mechanics" class="toc-sub-item"><span>Mechanics</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="gameplay.html#goals"     class="toc-sub-item"><span>Player Goals</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="gameplay.html#loop"      class="toc-sub-item"><span>Gameplay Loop</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="level-progression.html" class="toc-item"><span class="toc-name">Level Progression</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Systems -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('systems-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="systems.html" class="toc-item"><span>Systems</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="systems-subs">
+    <a href="systems.html" class="toc-sub-item"><span>Crafting</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="systems.html" class="toc-sub-item"><span>Customer</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="systems.html" class="toc-sub-item"><span>Combat</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="narrative.html" class="toc-item"><span class="toc-name">Narrative</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Level Progression -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('levelprog-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="level-progression.html" class="toc-item"><span>Level Progression</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="levelprog-subs">
+    <a href="level-progression.html" class="toc-sub-item"><span>Day Structure</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="level-progression.html" class="toc-sub-item"><span>Demo Unlock Order</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="level-progression.html" class="toc-sub-item"><span>Arena Opponent Order</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="level-progression.html" class="toc-sub-item"><span>Tutorials</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="art-direction.html" class="toc-item"><span class="toc-name">Art Direction</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Narrative -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('narrative-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="narrative.html" class="toc-item"><span>Narrative</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="narrative-subs">
+    <a href="narrative.html" class="toc-sub-item"><span>Story Premise</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="narrative.html" class="toc-sub-item"><span>Narrative Structure</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="environment.html" class="toc-item"><span class="toc-name">Environment</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Art Direction -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('artdir-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="art-direction.html" class="toc-item"><span>Art Direction</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="artdir-subs">
+    <a href="art-direction.html" class="toc-sub-item"><span>Art Mood Board</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="art-direction.html" class="toc-sub-item"><span>Style Mood Board</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="art-direction.html" class="toc-sub-item"><span>Color Palette</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="characters.html" class="toc-item"><span class="toc-name">Characters</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Environment -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('environment-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="environment.html" class="toc-item"><span>Environment</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="environment-subs">
+    <a href="environment.html" class="toc-sub-item"><span>Materials</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="environment.html" class="toc-sub-item"><span>Bakery (Day)</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="environment.html" class="toc-sub-item"><span>Arena (Night)</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="environment.html" class="toc-sub-item"><span>Props</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
-  <a href="user-interface.html" class="toc-item"><span class="toc-name">User Interface</span><span class="toc-arrow">&#8594;</span></a>
+  <!-- Characters -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('characters-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="characters.html" class="toc-item"><span>Characters</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="characters-subs">
+    <a href="characters.html" class="toc-sub-item"><span>Main Character</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="characters.html" class="toc-sub-item"><span>Golems</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="characters.html" class="toc-sub-item"><span>NPCs</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
+
+  <!-- User Interface -->
+  <div class="toc-row">
+    <button class="toc-chevron" onclick="toggleSubs('ui-subs', this)"><span class="chevron-icon">&#9656;</span></button>
+    <a href="user-interface.html" class="toc-item"><span>User Interface</span><span class="toc-arrow">&#8594;</span></a>
+  </div>
+  <div class="toc-subs" id="ui-subs">
+    <a href="user-interface.html" class="toc-sub-item"><span>UI Overview</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="user-interface.html" class="toc-sub-item"><span>Bakery UI</span><span class="toc-sub-arrow">&#8594;</span></a>
+    <a href="user-interface.html" class="toc-sub-item"><span>Arena UI</span><span class="toc-sub-arrow">&#8594;</span></a>
+  </div>
 
 </div>
 
 <script src="js/popper-2.11.8.min.js"></script>
 <script src="js/bootstrap-5.3.8.js"></script>
+<script>
+  function toggleSubs(id, btn) {
+    const subs = document.getElementById(id);
+    const isOpen = subs.classList.contains('open');
+    subs.classList.toggle('open');
+    btn.classList.toggle('open', !isOpen);
+  }
+</script>
 </body>
 </html>

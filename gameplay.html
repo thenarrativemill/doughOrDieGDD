@@ -67,8 +67,18 @@
   <div class="content-card">
     <h5>&#9670; Gameplay Overview</h5>
     <p>The player begins in the bakery in the <strong style="color:var(--cream);">prep phase</strong>. This allows the player to prepare up to 3 dough bases. A dough base consists of flour and water OR milk. To start a dough base, the player grabs flour, adds water, then places that dough base into the mixer. When finished, they bring it to a countertop and add the remaining ingredients for the chosen recipe.</p>
-    <p>Once the bakery opens, customers line up at the front register with a patience bar for being attended to. After taking their order, an icon of the pastry they'd like appears above their head with a new patience bar. Players must balance serving customers while also creating their bread golem for that night's fight.</p>
-    <p>Golem recipes always require five of the same base recipe dough balls placed into slots in the walk-in oven. Your golem can have a maximum of two special abilities — one per arm slot. The modifier dough determines the ability. The day ends when all customers are served, the walk-in oven door is closed, and the player presses the oven dial on the wall.</p>
+    <div class="row g-3">
+		  <div class="col-md-6">
+		  <img src="images/waterDoughGameplay.png" alt="waterDough" class="img-fluid w-100 mb-3" style="border-radius: 6px;">
+		</div>
+		  <div class="col-md-6">
+			  <img src="images/milkDoughGameplay.png" alt="milkDough" class="img-fluid w-100 mb-3" style="border-radius: 6px;">
+		  </div>
+		  </div>
+	  <p>Once the bakery opens, customers line up at the front register with a patience bar for being attended to. After taking their order, an icon of the pastry they'd like appears above their head with a new patience bar. Players must balance serving customers while also creating their bread golem for that night's fight.</p>
+    <img src="images/customerUI.png" alt="foh" class="img-fluid w-100 mb-3" style="border-radius: 6px;">
+	  <p>Golem recipes always require five of the same base recipe dough balls placed into slots in the walk-in oven. Your golem can have a maximum of two special abilities — one per arm slot. The modifier dough determines the ability. The day ends when all customers are served, the walk-in oven door is closed, and the player presses the oven dial on the wall.</p>
+	  <img src="images/WalkIn_1Page_Edited.png" alt="walkIn" class="img-fluid w-100 mb-3" style="border-radius: 6px;">
   </div>
 
   <!-- Mechanics -->
@@ -121,7 +131,45 @@
   <!-- Gameplay Loop -->
   <div class="content-card">
     <h5>&#9670; Gameplay Loop</h5>
-    <div class="placeholder-block">[ Placeholder — gameplay loop diagrams (Basic, Detailed, Baking, Customer, Golem Baking) to be added ]</div>
+    <div id="myCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+
+  <!-- Slide indicators (the little dots at the bottom) -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2"></button>
+	  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3"></button>
+	  <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="4"></button>
+  </div>
+
+  <!-- Slides -->
+  <div class="carousel-inner" style="border-radius: 6px;">
+    <div class="carousel-item active">
+      <img src="images/gameplayLoop.png" class="d-block w-100" alt="first photo">
+    </div>
+    <div class="carousel-item">
+      <img src="images/detailedGameplayLoop.png" class="d-block w-100" alt="second photo">
+    </div>
+    <div class="carousel-item">
+      <img src="images/bakingLoop.png" class="d-block w-100" alt="third photo">
+    </div>
+	  <div class="carousel-item">
+      <img src="images/customerLoop.png" class="d-block w-100" alt="fourth photo">
+    </div>
+	  <div class="carousel-item">
+      <img src="images/golemBakingLoop.png" class="d-block w-100" alt="fifth photo">
+    </div>
+  </div>
+
+  <!-- Previous/Next arrows -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
   </div>
 
   <hr style="border-color: var(--mid-neutral); margin: 2rem 0;">

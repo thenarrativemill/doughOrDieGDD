@@ -183,20 +183,61 @@
 
       <!-- Main section nodes -->
       <div class="node node-section" id="nodeOverview">Overview</div>
-      <div class="node node-section" id="nodeGameplay"     data-bs-toggle="modal" data-bs-target="#modalGameplay">Gameplay</div>
-      <div class="node node-section" id="nodeSystems"      data-bs-toggle="modal" data-bs-target="#modalSystems">Systems</div>
-      <div class="node node-section" id="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalLevelProg">Level<br>Progression</div>
-      <div class="node node-section" id="nodeNarrative"    data-bs-toggle="modal" data-bs-target="#modalNarrative">Narrative</div>
-      <div class="node node-section" id="nodeArtDir"       data-bs-toggle="modal" data-bs-target="#modalArtDir">Art<br>Direction</div>
-      <div class="node node-section" id="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalEnvironment">Environment</div>
-      <div class="node node-section" id="nodeCharacters"   data-bs-toggle="modal" data-bs-target="#modalCharacters">Characters</div>
-      <div class="node node-section" id="nodeUI"           data-bs-toggle="modal" data-bs-target="#modalUI">User<br>Interface</div>
+      <div class="node node-section" id="nodeGameplay">Gameplay</div>
+      <div class="node node-section" id="nodeSystems">Systems</div>
+      <div class="node node-section" id="nodeLevelProg">Level<br>Progression</div>
+      <div class="node node-section" id="nodeNarrative">Narrative</div>
+      <div class="node node-section" id="nodeArtDir">Art<br>Direction</div>
+      <div class="node node-section" id="nodeEnvironment">Environment</div>
+      <div class="node node-section" id="nodeCharacters">Characters</div>
+      <div class="node node-section" id="nodeUI">User<br>Interface</div>
 
       <!-- Overview subsection nodes -->
-      <div class="node node-sub" id="subGameCore"  data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalGameCore">Game<br>Core</div>
-      <div class="node node-sub" id="subThreeCs"   data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalThreeCs">3 C's</div>
-      <div class="node node-sub" id="subAudience"  data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalAudience">Audience &amp;<br>Playstyle</div>
-      <div class="node node-sub" id="subMarket"    data-parent="nodeOverview" data-bs-toggle="modal" data-bs-target="#modalMarket">Market<br>Survey</div>
+      <div class="node node-sub" id="subGameCore"        data-parent="nodeOverview"     data-bs-toggle="modal" data-bs-target="#modalGameCore">Game<br>Core</div>
+      <div class="node node-sub" id="subThreeCs"         data-parent="nodeOverview"     data-bs-toggle="modal" data-bs-target="#modalThreeCs">3 C's</div>
+      <div class="node node-sub" id="subAudience"        data-parent="nodeOverview"     data-bs-toggle="modal" data-bs-target="#modalAudience">Audience &amp;<br>Playstyle</div>
+      <div class="node node-sub" id="subMarket"          data-parent="nodeOverview"     data-bs-toggle="modal" data-bs-target="#modalMarket">Market<br>Survey</div>
+
+      <!-- Gameplay subsection nodes -->
+      <div class="node node-sub" id="subMechanics"       data-parent="nodeGameplay"     data-bs-toggle="modal" data-bs-target="#modalSubMechanics">Mechanics</div>
+      <div class="node node-sub" id="subPlayerGoals"     data-parent="nodeGameplay"     data-bs-toggle="modal" data-bs-target="#modalSubPlayerGoals">Player<br>Goals</div>
+      <div class="node node-sub" id="subGameplayLoop"    data-parent="nodeGameplay"     data-bs-toggle="modal" data-bs-target="#modalSubGameplayLoop">Gameplay<br>Loop</div>
+
+      <!-- Systems subsection nodes -->
+      <div class="node node-sub" id="subCrafting"        data-parent="nodeSystems"      data-bs-toggle="modal" data-bs-target="#modalSubCrafting">Crafting</div>
+      <div class="node node-sub" id="subCustomer"        data-parent="nodeSystems"      data-bs-toggle="modal" data-bs-target="#modalSubCustomer">Customer</div>
+      <div class="node node-sub" id="subCombatSys"       data-parent="nodeSystems"      data-bs-toggle="modal" data-bs-target="#modalSubCombatSys">Combat</div>
+
+      <!-- Level Progression subsection nodes -->
+      <div class="node node-sub" id="subDayStructure"    data-parent="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalSubDayStructure">Day<br>Structure</div>
+      <div class="node node-sub" id="subDemo"            data-parent="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalSubDemo">Demo</div>
+      <div class="node node-sub" id="subArenaOrder"      data-parent="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalSubArenaOrder">Arena<br>Order</div>
+      <div class="node node-sub" id="subTutorials"       data-parent="nodeLevelProg"    data-bs-toggle="modal" data-bs-target="#modalSubTutorials">Tutorials</div>
+
+      <!-- Narrative subsection nodes -->
+      <div class="node node-sub" id="subStoryPremise"    data-parent="nodeNarrative"    data-bs-toggle="modal" data-bs-target="#modalSubStoryPremise">Story<br>Premise</div>
+      <div class="node node-sub" id="subNarrStruct"      data-parent="nodeNarrative"    data-bs-toggle="modal" data-bs-target="#modalSubNarrStruct">Narrative<br>Structure</div>
+
+      <!-- Art Direction subsection nodes -->
+      <div class="node node-sub" id="subArtMood"         data-parent="nodeArtDir"       data-bs-toggle="modal" data-bs-target="#modalSubArtMood">Art Mood<br>Board</div>
+      <div class="node node-sub" id="subStyleMood"       data-parent="nodeArtDir"       data-bs-toggle="modal" data-bs-target="#modalSubStyleMood">Style Mood<br>Board</div>
+      <div class="node node-sub" id="subColorPalette"    data-parent="nodeArtDir"       data-bs-toggle="modal" data-bs-target="#modalSubColorPalette">Color<br>Palette</div>
+
+      <!-- Environment subsection nodes -->
+      <div class="node node-sub" id="subMaterials"       data-parent="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalSubMaterials">Materials</div>
+      <div class="node node-sub" id="subBakeryEnv"       data-parent="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalSubBakeryEnv">Bakery<br>(Day)</div>
+      <div class="node node-sub" id="subArenaEnv"        data-parent="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalSubArenaEnv">Arena<br>(Night)</div>
+      <div class="node node-sub" id="subProps"           data-parent="nodeEnvironment"  data-bs-toggle="modal" data-bs-target="#modalSubProps">Props</div>
+
+      <!-- Characters subsection nodes -->
+      <div class="node node-sub" id="subMainChar"        data-parent="nodeCharacters"   data-bs-toggle="modal" data-bs-target="#modalSubMainChar">Main<br>Character</div>
+      <div class="node node-sub" id="subGolems"          data-parent="nodeCharacters"   data-bs-toggle="modal" data-bs-target="#modalSubGolems">Golems</div>
+      <div class="node node-sub" id="subNPCs"            data-parent="nodeCharacters"   data-bs-toggle="modal" data-bs-target="#modalSubNPCs">NPCs</div>
+
+      <!-- User Interface subsection nodes -->
+      <div class="node node-sub" id="subUIOverview"      data-parent="nodeUI"           data-bs-toggle="modal" data-bs-target="#modalSubUIOverview">UI<br>Overview</div>
+      <div class="node node-sub" id="subBakeryUI"        data-parent="nodeUI"           data-bs-toggle="modal" data-bs-target="#modalSubBakeryUI">Bakery<br>UI</div>
+      <div class="node node-sub" id="subArenaUI"         data-parent="nodeUI"           data-bs-toggle="modal" data-bs-target="#modalSubArenaUI">Arena<br>UI</div>
     </div>
   </div>
 </div>
@@ -318,18 +359,263 @@
   </div></div>
 </div>
 
+<!-- ===== REMAINING SUBSECTION MODALS ===== -->
+
+<!-- Gameplay -->
+<div class="modal fade" id="modalSubMechanics" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Mechanics</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Gameplay</span>
+      <p>Three core mechanics drive the game: <strong style="color:var(--cream);">Baking</strong> (combine ingredients via minigames), <strong style="color:var(--cream);">Time Management</strong> (balance customers and golem prep), and <strong style="color:var(--cream);">Combat</strong> (first-person fighting, 90% melee).</p>
+      <a href="gameplay.html#mechanics" class="btn btn-teal btn-sm mt-1">View in Gameplay &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubPlayerGoals" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Player Goals</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Gameplay</span>
+      <p>Each phase has layered short, mid, and long-term goals. Short-term goals keep the player focused moment-to-moment; all long-term goals converge on winning the nightly golem fight and unlocking new recipes and upgrades.</p>
+      <a href="gameplay.html#goals" class="btn btn-teal btn-sm mt-1">View in Gameplay &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubGameplayLoop" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Gameplay Loop</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Gameplay</span>
+      <p>The loop cycles through four phases each day: prep (bake dough bases), open hours (serve customers and bake golem), close (select loadout), and the nightly arena fight followed by a Pick Three reward screen.</p>
+      <a href="gameplay.html#loop" class="btn btn-teal btn-sm mt-1">View in Gameplay &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Systems -->
+<div class="modal fade" id="modalSubCrafting" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Crafting</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Systems</span>
+      <p>Covers <strong style="color:var(--cream);">Ingredients</strong> (9 base + 4 special, each with culinary and combat properties) and <strong style="color:var(--cream);">Recipes</strong> (13 total — some for customers only, some usable as golem bases).</p>
+      <a href="systems.html" class="btn btn-teal btn-sm mt-1">View in Systems &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubCustomer" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Customer</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Systems</span>
+      <p>Covers the <strong style="color:var(--cream);">Customer Ordering</strong> system (3 customers day 1, scaling to 18–25 in late game), <strong style="color:var(--cream);">Customer Grading</strong> (patience bar scoring), and the <strong style="color:var(--cream);">Reputation</strong> system (daily Momentum and permanent Renown).</p>
+      <a href="systems.html" class="btn btn-teal btn-sm mt-1">View in Systems &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubCombatSys" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Combat</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Systems</span>
+      <p>Covers the modular <strong style="color:var(--cream);">Combat System</strong> (Combat, Health, and Hit Stop actor components), <strong style="color:var(--cream);">Golems</strong> (4 types with unique abilities), <strong style="color:var(--cream);">Perks</strong> (arena and bakery), and <strong style="color:var(--cream);">Enemy AI</strong>.</p>
+      <a href="systems.html" class="btn btn-teal btn-sm mt-1">View in Systems &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Level Progression -->
+<div class="modal fade" id="modalSubDayStructure" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Day Structure</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Level Progression</span>
+      <p>Each day moves through prep (bake dough bases before opening), open hours (serve customers and bake golem), dusk (close up and choose loadout), and the nightly arena fight.</p>
+      <a href="level-progression.html" class="btn btn-teal btn-sm mt-1">View in Level Progression &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubDemo" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Demo Unlock Order</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Level Progression</span>
+      <p>Players start Day 1 with Sourdough and Arepa. New recipes, golem blueprints, and special ingredients unlock across 9 days. Winning arena fights can also jump the unlock order ahead.</p>
+      <a href="level-progression.html" class="btn btn-teal btn-sm mt-1">View in Level Progression &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubArenaOrder" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Arena Opponent Order</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Level Progression</span>
+      <p>The arena opponent sequence across 9 days: Croissant, Grissini, Arepa, Sourdough, Melonpan, Simit, Injera, Pao de Queijo, and Croissant again at a higher difficulty.</p>
+      <a href="level-progression.html" class="btn btn-teal btn-sm mt-1">View in Level Progression &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubTutorials" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Tutorials</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Level Progression</span>
+      <p>Eight tutorial stages walk the player through the narrative intro, prep phase, customer ordering, reputation system, golem baking, a full open day, and finally the arena fight and Pick Three screen.</p>
+      <a href="level-progression.html" class="btn btn-teal btn-sm mt-1">View in Level Progression &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Narrative -->
+<div class="modal fade" id="modalSubStoryPremise" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Story Premise</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Narrative</span>
+      <p>A lineage of bakers with the Gift of Animation has secretly run the Dough Brawl Arena for generations. Now the legacy falls to Fran, who must carry on her Nonna's championship while keeping the bakery alive.</p>
+      <a href="narrative.html" class="btn btn-teal btn-sm mt-1">View in Narrative &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubNarrStruct" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Narrative Structure</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Narrative</span>
+      <p>Linear experience with linear gameplay. Cutscenes appear on Day 1 and at end game. Additional mid-game cutscenes are out of initial scope but may be added if feasible.</p>
+      <a href="narrative.html" class="btn btn-teal btn-sm mt-1">View in Narrative &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Art Direction -->
+<div class="modal fade" id="modalSubArtMood" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Art Mood Board</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Art Direction</span>
+      <p>Reference imagery defining the overall visual feel — the blend of warm bakery aesthetics with darker supernatural elements. Painterly style with visible stroke variation and muted old-bakery tones.</p>
+      <a href="art-direction.html" class="btn btn-teal btn-sm mt-1">View in Art Direction &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubStyleMood" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Style Mood Board</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Art Direction</span>
+      <p>Stylistic influences covering line weight, rendering approach, and illustrative choices. Chunky assets for isometric readability, consistent light edgewear on curvature, flat materials for a stylized non-PBR look.</p>
+      <a href="art-direction.html" class="btn btn-teal btn-sm mt-1">View in Art Direction &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubColorPalette" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Color Palette</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Art Direction</span>
+      <p>11-color environment palette grounded in warm wood tones (#B38864, #916440) and deep neutrals (#110A06, #3F281B), with Muted Teal (#7FA7A0), Dusty Red (#C46A5B), and Soft Pink (#E59A8C) as accents.</p>
+      <a href="art-direction.html" class="btn btn-teal btn-sm mt-1">View in Art Direction &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Environment -->
+<div class="modal fade" id="modalSubMaterials" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Materials</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Environment</span>
+      <p>Surface materials used across both environments — wood, stone, cloth, and baked goods — rendered to reinforce the game's aesthetic without veering into stylized realism.</p>
+      <a href="environment.html" class="btn btn-teal btn-sm mt-1">View in Environment &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubBakeryEnv" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Bakery (Day)</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Environment</span>
+      <p>The player's home base during daytime. Warm lighting, wooden counters, ingredient shelves. Isometric layout supports the baking and ordering loop. Round, chunky shape language — inviting and warm.</p>
+      <a href="environment.html" class="btn btn-teal btn-sm mt-1">View in Environment &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubArenaEnv" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Arena (Night)</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Environment</span>
+      <p>The nightly combat arena. Darker and more foreboding, with torch lighting and crumbling stone architecture contrasting sharply against the warmth of the bakery above.</p>
+      <a href="environment.html" class="btn btn-teal btn-sm mt-1">View in Environment &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubProps" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Props</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Environment</span>
+      <p>Key environmental props across both locations — baking equipment, ingredient crates, arena obstacles, and interactive set pieces that support gameplay readability and world feel.</p>
+      <a href="environment.html" class="btn btn-teal btn-sm mt-1">View in Environment &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- Characters -->
+<div class="modal fade" id="modalSubMainChar" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Main Character</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Characters</span>
+      <p>Francesca "Fran" Panettiere — 5'3", brown curly hair, olive skin. Warm, loud, and protective. Grew up in the bakery, sings to her golems while baking them, goes stone-faced the moment the fight begins.</p>
+      <a href="characters.html" class="btn btn-teal btn-sm mt-1">View in Characters &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubGolems" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Golems</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Characters</span>
+      <p>Four baked golem companions: Sourdough (tank, earthshaking endurance), Croissant (fast, layered strikes), Grissini (precise, piercing duelist), and Arepa (explosive mines, grapple pull).</p>
+      <a href="characters.html" class="btn btn-teal btn-sm mt-1">View in Characters &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubNPCs" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">NPCs</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">Characters</span>
+      <p>NPCs include Nonna — Il Mattarello, reigning arena champion — plus bakery customers and town residents who provide story context and optional dialogue throughout the game.</p>
+      <a href="characters.html" class="btn btn-teal btn-sm mt-1">View in Characters &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
+<!-- User Interface -->
+<div class="modal fade" id="modalSubUIOverview" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">UI Overview</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">User Interface</span>
+      <p>The UI is mostly non-diegetic with a hand-painted, almost pearlescent framing. Some elements break that framing intentionally to pull the player back into immersion at key moments.</p>
+      <a href="user-interface.html" class="btn btn-teal btn-sm mt-1">View in UI &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubBakeryUI" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Bakery UI</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">User Interface</span>
+      <p>Day phase HUD includes customer order queue, customers remaining counter, Momentum/Renown display, held item indicator, mixer uses remaining, recipe book, and end-of-day summary screen.</p>
+      <a href="user-interface.html" class="btn btn-teal btn-sm mt-1">View in UI &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+<div class="modal fade" id="modalSubArenaUI" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+    <div class="modal-header"><h5 class="modal-title">Arena UI</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body"><span class="sub-tag">User Interface</span>
+      <p>Night phase HUD is streamlined for combat: health bars for both fighters, player ability slots with cooldown states, and the Pick Three reward screen shown after each arena victory.</p>
+      <a href="user-interface.html" class="btn btn-teal btn-sm mt-1">View in UI &rsaquo;</a>
+    </div>
+  </div></div>
+</div>
+
 <script src="js/popper-2.11.8.min.js"></script>
 <script src="js/bootstrap-5.3.8.js"></script>
 <script>
   // ── Section panel content ─────────────────────────────────
   const sectionPanelContent = {
-    nodeOverview: {
-      tag: 'Core',
-      title: 'Overview',
-      body: `<p>Dough or Die is a stylized action game where a bakery owner survives supernatural arena combat by night using enchanted recipes and baked golem companions.</p>
-             <p>Covers the game's core concept, the 3 C's, target audience, playstyle, and market survey.</p>`,
-      link: 'overview.html'
-    }
+    nodeOverview:    { tag:'Core',          title:'Overview',        body:`<p>Dough or Die is a game where a bakery owner survives arena combat by night using enchanted recipes and baked golem companions.</p><p>Covers the game concept, 3 C's, audience, playstyle, and market survey.</p>`,                                           link:'overview.html' },
+    nodeGameplay:    { tag:'Core',          title:'Gameplay',        body:`<p>Players manage their bakery by day and fight in the arena by night using crafted weapons and golem companions.</p><p>Covers mechanics, player goals, and the gameplay loop across all four phases.</p>`,                                                    link:'gameplay.html' },
+    nodeSystems:     { tag:'Mechanics',     title:'Systems',         body:`<p>All interlocking game systems organized into three groups: Crafting, Customer, and Combat.</p><p>Each system feeds into the others across both the bakery and the arena.</p>`,                                                                            link:'systems.html' },
+    nodeLevelProg:   { tag:'Structure',     title:'Level Progression', body:`<p>Outlines the structure of a full game day, the demo unlock order, arena opponent sequence, and the full tutorial flow.</p>`,                                                                                                                           link:'level-progression.html' },
+    nodeNarrative:   { tag:'Narrative',     title:'Narrative',       body:`<p>The story of Francesca Panettiere and the lineage of bakers who discovered the Gift of Animation — and the illegal underground bread golem fighting ring born from it.</p>`,                                                                              link:'narrative.html' },
+    nodeArtDir:      { tag:'Art Direction', title:'Art Direction',   body:`<p>Defines the game's visual identity through mood boards and the full color palette. Muted, warm, painterly with consistent light edgewear.</p>`,                                                                                                          link:'art-direction.html' },
+    nodeEnvironment: { tag:'Environment',   title:'Environment',     body:`<p>Documents the warm isometric bakery by day and the dark first-person arena by night, along with materials and props.</p>`,                                                                                                                                link:'environment.html' },
+    nodeCharacters:  { tag:'Characters',    title:'Characters',      body:`<p>Covers Fran, her baked golem companions, and the NPC cast including Nonna — the legendary Il Mattarello and reigning Dough Brawl Arena champion.</p>`,                                                                                                   link:'characters.html' },
+    nodeUI:          { tag:'UI',            title:'User Interface',  body:`<p>Mostly non-diegetic HUD for both game phases. Bakery UI focuses on order and inventory; arena UI is streamlined for fast-paced combat.</p>`,                                                                                                             link:'user-interface.html' },
   };
 
   // ── Node config ───────────────────────────────────────────
@@ -357,10 +643,44 @@
   ];
 
   const subConfig = [
-    { id: 'subGameCore', parent: 'nodeOverview', relAngle: -60 },
-    { id: 'subThreeCs',  parent: 'nodeOverview', relAngle: -20 },
-    { id: 'subAudience', parent: 'nodeOverview', relAngle: 20  },
-    { id: 'subMarket',   parent: 'nodeOverview', relAngle: 60  },
+    // Overview
+    { id: 'subGameCore',     parent: 'nodeOverview',    relAngle: -60 },
+    { id: 'subThreeCs',      parent: 'nodeOverview',    relAngle: -20 },
+    { id: 'subAudience',     parent: 'nodeOverview',    relAngle:  20 },
+    { id: 'subMarket',       parent: 'nodeOverview',    relAngle:  60 },
+    // Gameplay
+    { id: 'subMechanics',    parent: 'nodeGameplay',    relAngle: -40 },
+    { id: 'subPlayerGoals',  parent: 'nodeGameplay',    relAngle:   0 },
+    { id: 'subGameplayLoop', parent: 'nodeGameplay',    relAngle:  40 },
+    // Systems
+    { id: 'subCrafting',     parent: 'nodeSystems',     relAngle: -40 },
+    { id: 'subCustomer',     parent: 'nodeSystems',     relAngle:   0 },
+    { id: 'subCombatSys',    parent: 'nodeSystems',     relAngle:  40 },
+    // Level Progression
+    { id: 'subDayStructure', parent: 'nodeLevelProg',   relAngle: -60 },
+    { id: 'subDemo',         parent: 'nodeLevelProg',   relAngle: -20 },
+    { id: 'subArenaOrder',   parent: 'nodeLevelProg',   relAngle:  20 },
+    { id: 'subTutorials',    parent: 'nodeLevelProg',   relAngle:  60 },
+    // Narrative
+    { id: 'subStoryPremise', parent: 'nodeNarrative',   relAngle: -30 },
+    { id: 'subNarrStruct',   parent: 'nodeNarrative',   relAngle:  30 },
+    // Art Direction
+    { id: 'subArtMood',      parent: 'nodeArtDir',      relAngle: -40 },
+    { id: 'subStyleMood',    parent: 'nodeArtDir',      relAngle:   0 },
+    { id: 'subColorPalette', parent: 'nodeArtDir',      relAngle:  40 },
+    // Environment
+    { id: 'subMaterials',    parent: 'nodeEnvironment', relAngle: -60 },
+    { id: 'subBakeryEnv',    parent: 'nodeEnvironment', relAngle: -20 },
+    { id: 'subArenaEnv',     parent: 'nodeEnvironment', relAngle:  20 },
+    { id: 'subProps',        parent: 'nodeEnvironment', relAngle:  60 },
+    // Characters
+    { id: 'subMainChar',     parent: 'nodeCharacters',  relAngle: -40 },
+    { id: 'subGolems',       parent: 'nodeCharacters',  relAngle:   0 },
+    { id: 'subNPCs',         parent: 'nodeCharacters',  relAngle:  40 },
+    // User Interface
+    { id: 'subUIOverview',   parent: 'nodeUI',          relAngle: -40 },
+    { id: 'subBakeryUI',     parent: 'nodeUI',          relAngle:   0 },
+    { id: 'subArenaUI',      parent: 'nodeUI',          relAngle:  40 },
   ];
 
   const SUB_RADIUS = 115;
@@ -510,32 +830,30 @@
 
   // ── Section node click handler ────────────────────────────
   function handleSectionClick(nodeId) {
-    const hasChildren = subConfig.some(s => s.parent === nodeId);
+    const hasChildren     = subConfig.some(s => s.parent === nodeId);
     const hasPanelContent = !!sectionPanelContent[nodeId];
 
-    if (hasChildren && !expandedAll) {
-      if (activeParent === nodeId) {
-        // Collapse — same node clicked again
-        closePanel();
-      } else {
-        // Expand this section
-        activeParent = nodeId;
-        showSubsOf(nodeId);
-        document.querySelectorAll('.node-section').forEach(n => n.classList.remove('active-section'));
-        document.getElementById(nodeId).classList.add('active-section');
-        if (hasPanelContent) {
-          zoomToNode(nodeId); // set origin before panel shifts canvas
-          openPanel(nodeId);  // panel and zoom animate together
-        }
+    if (activeParent === nodeId) {
+      // Same node clicked again — collapse
+      closePanel();
+    } else {
+      activeParent = nodeId;
+      document.querySelectorAll('.node-section').forEach(n => n.classList.remove('active-section'));
+      document.getElementById(nodeId).classList.add('active-section');
+
+      if (hasChildren && !expandedAll) showSubsOf(nodeId);
+      if (hasPanelContent) {
+        zoomToNode(nodeId);
+        openPanel(nodeId);
       }
     }
-    // Sections without children use Bootstrap modal directly (data-bs-toggle left on them)
   }
 
-  // Attach click handlers to section nodes that have children
+  // Attach click handlers to all section nodes that have panel content
   nodeConfig.forEach(n => {
-    const hasChildren = subConfig.some(s => s.parent === n.id);
-    if (!hasChildren) return;
+    const hasChildren   = subConfig.some(s => s.parent === n.id);
+    const hasPanelContent = !!sectionPanelContent[n.id];
+    if (!hasPanelContent) return;
     document.getElementById(n.id).addEventListener('click', () => handleSectionClick(n.id));
   });
 

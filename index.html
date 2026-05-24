@@ -96,15 +96,13 @@
     }
     .node:hover { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 0 22px rgba(127,167,160,0.5); }
     .node-hub {
-      width: 120px; height: 120px;
       background-color: var(--dark-accent); border: 3px solid var(--wood-primary);
-      color: var(--cream); font-size: 0.9rem; cursor: default;
+      color: var(--cream); cursor: default;
     }
     .node-hub:hover { transform: translate(-50%, -50%); box-shadow: none; }
     .node-section {
-      width: 85px; height: 85px;
       background-color: var(--dark-accent); border: 2px solid var(--muted-teal);
-      color: var(--cream); font-size: 0.72rem;
+      color: var(--cream);
     }
     .node-section:hover { border-color: var(--soft-pink); color: var(--soft-pink); }
     .node-section.active-section {
@@ -113,9 +111,8 @@
       color: var(--wood-primary);
     }
     .node-sub {
-      width: 62px; height: 62px;
       background-color: var(--near-black); border: 1.5px solid var(--wood-secondary);
-      color: var(--light-neutral); font-size: 0.62rem;
+      color: var(--light-neutral);
       opacity: 0; pointer-events: none;
       transition: transform 0.2s, box-shadow 0.2s, opacity 0.35s;
     }
@@ -683,8 +680,17 @@
     { id: 'subArenaUI',      parent: 'nodeUI',          relAngle:  40 },
   ];
 
-  const SUB_RADIUS = 115;
-  const HUB_RADIUS_RATIO = 0.24;
+  // Node sizes scale with the smaller canvas dimension
+  function getNodeSizes(W, H) {
+    const minDim = Math.min(W, H);
+    return {
+      hubSize:     Math.max(70,  Math.round(minDim * 0.13)),
+      sectionSize: Math.max(50,  Math.round(minDim * 0.09)),
+      subSize:     Math.max(38,  Math.round(minDim * 0.067)),
+      hubRadius:   Math.max(100, Math.round(minDim * 0.24)),
+      subRadius:   Math.max(70,  Math.round(minDim * 0.115)),
+    };
+  }
 
   let positions    = {};
   let expandedAll  = false;
@@ -697,10 +703,28 @@
     const W = canvas.offsetWidth;
     const H = canvas.offsetHeight;
     const cx = W / 2, cy = H / 2;
-    const radius = Math.min(W, H) * HUB_RADIUS_RATIO;
+    const sizes  = getNodeSizes(W, H);
+    const radius = sizes.hubRadius;
 
-    document.getElementById('hub').style.left = cx + 'px';
-    document.getElementById('hub').style.top  = cy + 'px';
+    // Apply scaled sizes to all nodes
+    const hub = document.getElementById('hub');
+    hub.style.width  = sizes.hubSize + 'px';
+    hub.style.height = sizes.hubSize + 'px';
+    hub.style.fontSize = Math.max(9, Math.round(sizes.hubSize * 0.13)) + 'px';
+
+    document.querySelectorAll('.node-section').forEach(el => {
+      el.style.width  = sizes.sectionSize + 'px';
+      el.style.height = sizes.sectionSize + 'px';
+      el.style.fontSize = Math.max(8, Math.round(sizes.sectionSize * 0.12)) + 'px';
+    });
+    document.querySelectorAll('.node-sub').forEach(el => {
+      el.style.width  = sizes.subSize + 'px';
+      el.style.height = sizes.subSize + 'px';
+      el.style.fontSize = Math.max(7, Math.round(sizes.subSize * 0.115)) + 'px';
+    });
+
+    hub.style.left = cx + 'px';
+    hub.style.top  = cy + 'px';
     positions['hub'] = { x: cx, y: cy };
 
     svg.innerHTML = '';
@@ -719,8 +743,8 @@
     subConfig.forEach(s => {
       const parent    = positions[s.parent];
       const subAngle  = (parent.angle + s.relAngle) * Math.PI / 180;
-      const sx = parent.x + SUB_RADIUS * Math.cos(subAngle);
-      const sy = parent.y + SUB_RADIUS * Math.sin(subAngle);
+      const sx = parent.x + sizes.subRadius * Math.cos(subAngle);
+      const sy = parent.y + sizes.subRadius * Math.sin(subAngle);
       const el = document.getElementById(s.id);
       el.style.left = sx + 'px';
       el.style.top  = sy + 'px';
@@ -877,7 +901,15 @@
   }
 
   // ── Init ──────────────────────────────────────────────────
-  layoutNodes();
+  // Use rAF to ensure the canvas has its final dimensions before layout
+  function initLayout() {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        layoutNodes();
+      });
+    });
+  }
+  initLayout();
   window.addEventListener('resize', layoutNodes);
 </script>
 </body>

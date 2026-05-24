@@ -629,14 +629,31 @@
   ];
 
   const crossLinks = [
+    // Core design relationships
+    ['nodeOverview',    'nodeGameplay'],
+    ['nodeOverview',    'nodeNarrative'],
+    ['nodeOverview',    'nodeArtDir'],
+
+    // Gameplay & systems chain
     ['nodeGameplay',    'nodeSystems'],
+    ['nodeGameplay',    'nodeLevelProg'],
+    ['nodeGameplay',    'nodeCharacters'],
     ['nodeSystems',     'nodeLevelProg'],
+    ['nodeSystems',     'nodeCharacters'],
+    ['nodeSystems',     'nodeUI'],
+
+    // Narrative & story chain
     ['nodeLevelProg',   'nodeNarrative'],
     ['nodeNarrative',   'nodeCharacters'],
+
+    // Art & world chain
     ['nodeArtDir',      'nodeEnvironment'],
     ['nodeArtDir',      'nodeCharacters'],
     ['nodeEnvironment', 'nodeCharacters'],
+
+    // UI connections
     ['nodeUI',          'nodeGameplay'],
+    ['nodeUI',          'nodeOverview'],
   ];
 
   const subConfig = [
